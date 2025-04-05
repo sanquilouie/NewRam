@@ -3,9 +3,9 @@
 
 // Database configuration
 $dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "";
-$dbname = "ramstardb";
+$dbuser = "u916947975_ramstardb";
+$dbpass = "?i7PuPc[0@w:";
+$dbname = "u916947975_ramstardb";
 
 // Mysqli connection
 $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
