@@ -1,11 +1,21 @@
 <?php
 // connection.php
 
-// Database configuration
-$dbhost = "localhost";
-$dbuser = "u916947975_ramstardb";
-$dbpass = "?i7PuPc[0@w:";
-$dbname = "u916947975_ramstardb";
+// config.php
+
+if ($_SERVER['HTTP_HOST'] === 'localhost') {
+    // Local
+    $dbhost = "localhost";
+    $dbuser = "root";
+    $dbpass = "";
+    $dbname = "ramstardb";
+} else {
+    // Live
+    $dbhost = "localhost";
+	$dbuser = "u916947975_ramstardb";
+	$dbpass = "?i7PuPc[0@w:";
+	$dbname = "u916947975_ramstardb";
+}
 
 // Mysqli connection
 $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
