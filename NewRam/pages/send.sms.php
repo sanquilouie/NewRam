@@ -1,22 +1,34 @@
 <?php
+$apiUrl = 'https://api.traccar.org/sms/send'; // Replace with the actual Traccar Cloud API URL
+$apiKey = 'dWZuVfIdT4ORlGUsQqwT7a:APA91bHew2lX546HOJBufwadFjX6FKLBhqo2cVYSyMJsRO-mOZpiML3tjRYFeoGrjzf-eGF9XdFqIe5n6Jj5IF7oyUwebJObIGNE6J5HcgF5-wkTJrJD_n0';  // Get this from your Traccar Cloud account
+
+$phoneNumber = '+638678315156';  // Recipient phone number
+$message = 'Hello from Traccar Cloud SMS Gateway';
+
+// Prepare data for API request
+$data = [
+    'apiKey' => $apiKey,
+    'to' => $phoneNumber,
+    'message' => $message
+];
+
+// Initialize cURL session
 $ch = curl_init();
-$parameters = array(
-    'apikey' => '24f3a870f7c5a97cf1c6ec0f2e2491b9', //Your API KEY
-    'number' => '09678315156',
-    'message' => 'Test SMS from Semaphore, please ignore.',
-    'sendername' => 'SEMAPHORE'
-);
-curl_setopt( $ch, CURLOPT_URL,'https://semaphore.co/api/v4/messages' );
-curl_setopt( $ch, CURLOPT_POST, 1 );
+curl_setopt($ch, CURLOPT_URL, $apiUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 
-//Send the parameters set above with the request
-curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+// Execute the request and capture the response
+$response = curl_exec($ch);
 
-// Receive response from server
-curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-$output = curl_exec( $ch );
-curl_close ($ch);
+// Check for errors
+if ($response === false) {
+    echo 'Error:' . curl_error($ch);
+} else {
+    echo 'SMS sent successfully! Response: ' . $response;
+}
 
-//Show the server response
-echo $output;
+// Close cURL session
+curl_close($ch);
 ?>
